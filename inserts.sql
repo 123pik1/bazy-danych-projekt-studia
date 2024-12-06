@@ -36,19 +36,18 @@ INSERT INTO Osoby (Imie, Nazwisko, Data_urodzenia, Kraj_pochodzenia) VALUES ('Re
 
 
 
-
 INSERT INTO Klienci (ID_klienta, email) VALUES (1, 'owalski@xd.pl');
 INSERT INTO Klienci (ID_klienta, email) VALUES (3, 'amiGami4@loveu.com');
 INSERT INTO Klienci (ID_klienta, email) VALUES (12, '123pik1@pku.pl');
 INSERT INTO Klienci (ID_klienta, email) VALUES (13, 'kkk@music,pl');
 INSERT INTO Klienci (ID_klienta, email) VALUES (14, 'markubal@pg.edu.pl');
 INSERT INTO Klienci (ID_klienta, email) VALUES (15, 'pkpk@alfa.pl');
-INSERT INTO Klienci (ID_klienta, email) VALUES (26, 'jp100procent%badboy.pl');
+INSERT INTO Klienci (ID_klienta, email) VALUES (26, 'jp100procent@badboy.pl');
 INSERT INTO Klienci (ID_klienta, email) VALUES (27, 'rrowski@rr.ru');
 INSERT INTO Klienci (ID_klienta, email) VALUES (28, 'markol@lol.pl');
 INSERT INTO Klienci (ID_klienta, email) VALUES (29, 'aga2137@idol.com');
 INSERT INTO Klienci (ID_klienta, email) VALUES (30, 'rom@romPoczta.com');
-INSErt INTO Klienci (ID_klienta, email) VALUES (31, 'sprzedamOpla@janusz.pl');
+INSERT INTO Klienci (ID_klienta, email) VALUES (31, 'sprzedamOpla@janusz.pl');
 
 
 
@@ -57,3 +56,32 @@ INSERT INTO Pracownicy (ID_pracownika, Data_rozpoczecia_pracy) VALUES (31, '2019
 INSERT INTO Pracownicy (ID_pracownika, Data_rozpoczecia_pracy) VALUES (32, '2019-02-01');
 
 
+INSERT INTO Wydawcy (Nazwa_wydawcy, Miasto_pochodzenia, Rok_zalozenia) VALUES
+('WPN', 'Warszawa', '2000-01-01');
+
+INSERT INTO Gatunki (Nazwa_gatunku) VALUES
+('Przygodowe');
+
+INSERT INTO Ksiazki (ISBN, ID_autora, Tytul_ksiazki, Liczba_ksiazek, Mozliwosc_wypozyczenia, Kara_za_przetrzymanie, Wydawca)
+Values
+('9999999999', 5, 'Alfa', 6, 1, 20.3 , 'WPN');
+
+
+
+INSERT INTO Przypisanie_gatunkow (Nazwa_gatunku, ISBN)
+VALUES
+('Przygodowe', '9999999999');
+
+INSERT INTO Rezerwacje (Data_przewidywanego_wypozyczenia, ID_klienta, ISBN)
+VALUES
+('2020-08-12', 31, '9999999999');
+
+
+
+INSERT INTO Wypozyczenia (ID_rezerwacji, Data_wypozyczenia, Termin_oddania)
+VALUES
+(1,'2020-10-17', '2020-10-21');
+
+INSERT INTO Kary(Wysokosc_kary, Termin_zaplaty, ID_rezerwacji)
+VALUES
+(600, '2021-09-01', 1);

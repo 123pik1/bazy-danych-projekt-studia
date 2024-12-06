@@ -12,7 +12,7 @@ CREATE TABLE Osoby
 CREATE TABLE Klienci
 (
     ID_klienta INT NOT NULL,
-    email VARCHAR(50) NOT NULL CHECK (email LIKE '%@%.%'),
+    email VARCHAR(50) NOT NULL CHECK (PATINDEX('%[@]%',email)>1 AND PATINDEX('%[@]%',email)<LEN(email)),
     FOREIGN KEY (ID_klienta) REFERENCES Osoby(ID_osoby),
     PRIMARY KEY (ID_klienta)
 );
@@ -36,16 +36,16 @@ CREATE TABLE Wydawcy
 
 CREATE TABLE Ksiazki
 (
-    ISBN INT NOT NULL CHECK (ISBN BETWEEN 1000000000 AND 1000000000 OR ISBN BETWEEN 1000000000000 AND 10000000000000),
+    ISBN VARCHAR(15) NOT NULL CHECK (LEN(ISBN)=10 OR LEN(ISBN)=13),
     ID_autora INT NOT NULL,
-    Tytul_ksiazki VARCHAR NOT NULL CHECK (LEN(Tytul_ksiazki) BETWEEN 1 AND 30),
-    Liczba_ksiazke INT NOT NULL CHECK (Liczba_ksiazke > 0),
+    Tytul_ksiazki VARCHAR(30) NOT NULL CHECK (LEN(Tytul_ksiazki) BETWEEN 1 AND 30),
+    Liczba_ksiazek INT NOT NULL CHECK (Liczba_ksiazek > 0),
     Mozliwosc_wypozyczenia BIT NOT NULL,
-    Kara_za_przetrzymanie DECIMAL(10,2) NOT NULL,
+    Kara_za_przetrzymanie Money NOT NULL,
     Wydawca VARCHAR(25) NOT NULL,
     PRIMARY KEY (ISBN),
-    FOREIGN KEY (ID_autora) REFERENCES Osoby(ID_osoby),
-    FOREIGN KEY (Wydawca) REFERENCES Wydawcy(Nazwa_wydawcy)
+    FOREIGN KEY (ID_autora) REFERENCES Osoby(ID_osoby)  ON DELETE CASCADE,
+    FOREIGN KEY (Wydawca) REFERENCES Wydawcy(Nazwa_wydawcy)  ON DELETE CASCADE
 );
 
 CREATE TABLE Gatunki
@@ -57,8 +57,10 @@ CREATE TABLE Gatunki
 CREATE TABLE Przypisanie_gatunkow
 (
     Nazwa_gatunku VARCHAR(30) NOT NULL, 
-    ISBN INT NOT NULL,
+    ISBN VARCHAR(15) NOT NULL,
     PRIMARY KEY (Nazwa_gatunku, ISBN),
+    FOREIGN KEY (Nazwa_gatunku) REFERENCES Gatunki(Nazwa_gatunku) ON DELETE CASCADE,
+    FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN)  ON DELETE CASCADE
 );
 
 CREATE TABLE Rezerwacje 
@@ -66,7 +68,7 @@ CREATE TABLE Rezerwacje
     ID_rezerwacji INT NOT NULL IDENTITY(1,1),
     Data_przewidywanego_wypozyczenia DATE NOT NULL,
     ID_klienta INT NOT NULL,
-    ISBN INT NOT NULL,
+    ISBN VARCHAR(15) NOT NULL,
     PRIMARY KEY (ID_rezerwacji),
     FOREIGN KEY (ID_klienta) REFERENCES Klienci(ID_klienta),
     FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN)
@@ -76,7 +78,7 @@ CREATE TABLE Wypozyczenia
 (
     ID_rezerwacji INT NOT NULL,
     Data_wypozyczenia DATE NOT NULL,
-    Termin_oddania DATE NOT NULL, -- TODO sprawdzic czy nie jest wczesniej niz data wypozyczenia
+    Termin_oddania DATE NOT NULL, --CHECK ((DATEDIFF(day,Data_wypozyczenia, Termin_oddania)<0)),
     PRIMARY KEY (ID_rezerwacji),
     FOREIGN KEY (ID_rezerwacji) REFERENCES Rezerwacje(ID_rezerwacji)
 );
@@ -84,7 +86,7 @@ CREATE TABLE Wypozyczenia
 CREATE TABLE Kary
 (
     ID_kary INT NOT NULL IDENTITY(1,1),
-    Wysokosc_kary DECIMAL(10,2) NOT NULL,
+    Wysokosc_kary MONEY NOT NULL,
     Termin_zaplaty DATE NOT NULL,
     Data_oplacenia DATE,
     ID_rezerwacji INT NOT NULL,
@@ -99,7 +101,7 @@ CREATE TABLE Operacje
     ID_operacji INT NOT NULL IDENTITY(1,1),
     Data_operacji DATE NOT NULL,
     ID_pracownika INT NOT NULL,
-    ISBN INT NOT NULL,
+    ISBN VARCHAR(15) NOT NULL,
     Liczba_egzemplarzy INT NOT NULL CHECK (Liczba_egzemplarzy > 0),
     Rodzaj_operacji VARCHAR(20) NOT NULL CHECK (Rodzaj_operacji IN ('Usuniecie', 'Dodanie')),
     PRIMARY KEY (ID_operacji),
