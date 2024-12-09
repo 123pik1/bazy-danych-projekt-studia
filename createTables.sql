@@ -13,7 +13,7 @@ CREATE TABLE Klienci
 (
     ID_klienta INT NOT NULL,
     email VARCHAR(50) NOT NULL CHECK (PATINDEX('%[@]%',email)>1 AND PATINDEX('%[@]%',email)<LEN(email)),
-    FOREIGN KEY (ID_klienta) REFERENCES Osoby(ID_osoby),
+    FOREIGN KEY (ID_klienta) REFERENCES Osoby(ID_osoby) ON DELETE CASCADE, -- No practcal use if its index IDENTITY(1,1)
     PRIMARY KEY (ID_klienta)
 );
 
@@ -22,8 +22,8 @@ CREATE TABLE Pracownicy
     ID_pracownika INT NOT NULL,
     Data_rozpoczecia_pracy DATE NOT NULL,
     Data_zakonczenia_pracy DATE,
-    FOREIGN KEY (ID_pracownika) REFERENCES Osoby(ID_osoby),
-    PRIMARY KEY (ID_pracownika)
+    FOREIGN KEY (ID_pracownika) REFERENCES Osoby(ID_osoby) ON DELETE CASCADE,
+    PRIMARY KEY (ID_pracownika) 
 );
 
 CREATE TABLE Wydawcy
@@ -42,10 +42,10 @@ CREATE TABLE Ksiazki
     Liczba_ksiazek INT NOT NULL CHECK (Liczba_ksiazek > 0),
     Mozliwosc_wypozyczenia BIT NOT NULL,
     Kara_za_przetrzymanie Money NOT NULL,
-    Wydawca VARCHAR(25) NOT NULL,
+    Wydawca VARCHAR(25) NOT NUlL,
     PRIMARY KEY (ISBN),
     FOREIGN KEY (ID_autora) REFERENCES Osoby(ID_osoby)  ON DELETE CASCADE,
-    FOREIGN KEY (Wydawca) REFERENCES Wydawcy(Nazwa_wydawcy)  ON DELETE CASCADE
+    FOREIGN KEY (Wydawca) REFERENCES Wydawcy(Nazwa_wydawcy)  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Gatunki
@@ -59,8 +59,8 @@ CREATE TABLE Przypisanie_gatunkow
     Nazwa_gatunku VARCHAR(30) NOT NULL, 
     ISBN VARCHAR(15) NOT NULL,
     PRIMARY KEY (Nazwa_gatunku, ISBN),
-    FOREIGN KEY (Nazwa_gatunku) REFERENCES Gatunki(Nazwa_gatunku) ON DELETE CASCADE,
-    FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN)  ON DELETE CASCADE
+    FOREIGN KEY (Nazwa_gatunku) REFERENCES Gatunki(Nazwa_gatunku) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN)  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Rezerwacje 
@@ -71,7 +71,7 @@ CREATE TABLE Rezerwacje
     ISBN VARCHAR(15) NOT NULL,
     PRIMARY KEY (ID_rezerwacji),
     FOREIGN KEY (ID_klienta) REFERENCES Klienci(ID_klienta),
-    FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN)
+    FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN) ON UPDATE CASCADE
 );
 
 CREATE TABLE Wypozyczenia
@@ -106,5 +106,14 @@ CREATE TABLE Operacje
     Rodzaj_operacji VARCHAR(20) NOT NULL CHECK (Rodzaj_operacji IN ('Usuniecie', 'Dodanie')),
     PRIMARY KEY (ID_operacji),
     FOREIGN KEY (ID_pracownika) REFERENCES Pracownicy(ID_pracownika),
-    FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN)
+    FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN) ON UPDATE CASCADE
 );
+
+
+-- triggers
+CREATE TRIGGER Operacje_quantity_Ksiazki
+ON Ksiazki
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    IF EXISTS 
