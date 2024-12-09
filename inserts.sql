@@ -30,7 +30,27 @@ INSERT INTO Osoby (Imie, Nazwisko, Data_urodzenia, Kraj_pochodzenia) VALUES
 ('Agata', 'Kowalska', '2000-02-02', 'Polska'),
 ('Agata', 'Romcajska', '2000-02-02', 'Polska'),
 ('Krzysztof', 'Kowalski', '2000-02-02', 'Polska'),
-('Remigiusz', 'Mróz', '1987-12-15', 'Polska');
+('Remigiusz', 'Mróz', '1987-12-15', 'Polska'),
+('Maria', 'Curie', '1867-11-07', 'Polska'),
+('Albert', 'Einstein', '1879-03-14', 'Niemcy'),
+('Nikola', 'Tesla', '1856-07-10', 'Serbia'),
+('Leonardo', 'da Vinci', '1452-04-15', 'Włochy'),
+('Galileo', 'Galilei', '1564-02-15', 'Włochy'),
+('Isaac', 'Newton', '1643-01-04', 'Wielka Brytania'),
+('Charles', 'Darwin', '1809-02-12', 'Wielka Brytania'),
+('Stephen', 'Hawking', '1942-01-08', 'Wielka Brytania'),
+('Marie', 'Curie', '1867-11-07', 'Polska'),
+('Thomas', 'Edison', '1847-02-11', 'USA'),
+('Alexander', 'Graham Bell', '1847-03-03', 'Szkocja'),
+('James', 'Watt', '1736-01-19', 'Szkocja'),
+('Michael', 'Faraday', '1791-09-22', 'Wielka Brytania'),
+('Louis', 'Pasteur', '1822-12-27', 'Francja'),
+('Sigmund', 'Freud', '1856-05-06', 'Austria'),
+('Gregor', 'Mendel', '1822-07-20', 'Czechy'),
+('Niels', 'Bohr', '1885-10-07', 'Dania'),
+('Max', 'Planck', '1858-04-23', 'Niemcy'),
+('Erwin', 'Schrödinger', '1887-08-12', 'Austria'),
+('Richard', 'Feynman', '1918-05-11', 'USA');
 
 INSERT INTO Klienci (ID_klienta, email) VALUES
 (1, 'owalski@xd.pl'),
@@ -44,15 +64,66 @@ INSERT INTO Klienci (ID_klienta, email) VALUES
 (28, 'markol@lol.pl'),
 (29, 'aga2137@idol.com'),
 (30, 'rom@romPoczta.com'),
-(31, 'sprzedamOpla@janusz.pl');
+(31, 'sprzedamOpla@janusz.pl'),
+(32, 'mcurie@science.com'),
+(33, 'aeinstein@relativity.com'),
+(34, 'ntesla@electricity.com'),
+(35, 'ldavinci@renaissance.com'),
+(36, 'ggalilei@astronomy.com'),
+(37, 'inewton@physics.com'),
+(38, 'cdarwin@evolution.com'),
+(39, 'shawking@cosmology.com'),
+(40, 'tcurie@radioactivity.com'),
+(41, 'tedison@invention.com'),
+(42, 'agbell@communication.com'),
+(43, 'jwatt@steam.com'),
+(44, 'mfaraday@electromagnetism.com'),
+(45, 'lpasteur@microbiology.com'),
+(46, 'sfreud@psychoanalysis.com'),
+(47, 'gmendel@genetics.com'),
+(48, 'nbohr@quantum.com'),
+(49, 'mplanck@quantumtheory.com'),
+(50, 'eschrodinger@wave.com'),
+(51, 'rfeynman@quantummechanics.com');
+
+
 
 INSERT INTO Pracownicy (ID_pracownika, Data_rozpoczecia_pracy, Data_zakonczenia_pracy) VALUES
 (2, '2019-01-01', '2020-01-01'),
 (31, '2019-01-15', NULL),
-(32, '2019-02-01', NULL);
+(32, '2019-02-01', NULL),
+(33, '2019-03-01', NULL),
+(34, '2019-04-01', NULL),
+(35, '2019-05-01', NULL),
+(36, '2019-06-01', NULL),
+(37, '2019-07-01', NULL),
+(38, '2019-08-01', NULL),
+(39, '2019-09-01', NULL),
+(40, '2019-10-01', NULL),
+(41, '2019-11-01', NULL),
+(42, '2019-12-01', NULL),
+(43, '2020-01-01', NULL),
+(44, '2020-02-01', NULL),
+(45, '2020-03-01', NULL),
+(46, '2020-04-01', NULL),
+(47, '2020-05-01', NULL),
+(48, '2020-06-01', NULL),
+(49, '2020-07-01', NULL),
+(50, '2020-08-01', NULL),
+(51, '2020-09-01', NULL);
 
 INSERT INTO Wydawcy (Nazwa_wydawcy, Miasto_pochodzenia, Rok_zalozenia) VALUES
-('WPN', 'Warszawa', '2000-01-01');
+('WPN', 'Warszawa', '2000-01-01'),
+('Penguin Books', 'Londyn', '1935-01-01'),
+('HarperCollins', 'Nowy Jork', '1989-01-01'),
+('Simon & Schuster', 'Nowy Jork', '1924-01-01'),
+('Hachette Livre', 'Paryż', '1826-01-01'),
+('Macmillan Publishers', 'Londyn', '1843-01-01'),
+('Random House', 'Nowy Jork', '1927-01-01'),
+('Scholastic', 'Nowy Jork', '1920-01-01'),
+('Bloomsbury', 'Londyn', '1986-01-01'),
+('Oxford University Press', 'Oxford', '1586-01-01'),
+('Cambridge University Press', 'Cambridge', '1534-01-01');
 
 INSERT INTO Gatunki (Nazwa_gatunku) VALUES
 ('Przygodowe'),
@@ -77,7 +148,27 @@ INSERT INTO Gatunki (Nazwa_gatunku) VALUES
 ('Komiks');
 
 INSERT INTO Ksiazki (ISBN, ID_autora, Tytul_ksiazki, Liczba_ksiazek, Mozliwosc_wypozyczenia, Kara_za_przetrzymanie, Wydawca) VALUES
-('9999999999', 5, 'Alfa', 6, 1, 20.3 , 'WPN');
+('9999999999', 5, 'Alfa', 6, 1, 20.3 , 'WPN'),
+('1234567890', 1, 'Przygody Tomka', 10, 1, 15.0, 'Penguin Books'),
+('2345678901', 2, 'W pustyni i w puszczy', 5, 1, 10.0, 'HarperCollins'),
+('3456789012', 3, 'Lalka', 8, 1, 12.5, 'Simon & Schuster'),
+('4567890123', 4, 'Pan Tadeusz', 7, 1, 18.0, 'Hachette Livre'),
+('5678901234', 6, 'Krzyżacy', 6, 1, 20.0, 'Macmillan Publishers'),
+('6789012345', 7, 'Nad Niemnem', 4, 1, 14.0, 'Random House'),
+('7890123456', 8, 'Chłopi', 9, 1, 16.0, 'Scholastic'),
+('8901234567', 9, 'Wesele', 3, 1, 11.0, 'Bloomsbury'),
+('9012345678', 10, 'Poezje', 12, 1, 13.0, 'Oxford University Press'),
+('0123456789', 11, 'Zniewolony umysł', 5, 1, 17.0, 'Cambridge University Press'),
+('1122334455', 12, 'Solaris', 8, 1, 19.0, 'Penguin Books'),
+('2233445566', 13, 'Dzienniki gwiazdowe', 7, 1, 14.5, 'HarperCollins'),
+('3344556677', 14, 'Bajki robotów', 6, 1, 12.0, 'Simon & Schuster'),
+('4455667788', 15, 'Cyberiada', 5, 1, 18.5, 'Hachette Livre'),
+('5566778899', 16, 'Opowieści o pilocie Pirxie', 4, 1, 16.0, 'Macmillan Publishers'),
+('6677889900', 17, 'Eden', 3, 1, 20.0, 'Random House'),
+('7788990011', 18, 'Powrót z gwiazd', 2, 1, 15.0, 'Scholastic'),
+('8899001122', 19, 'Kongres futurologiczny', 1, 1, 13.5, 'Bloomsbury'),
+('9900112233', 20, 'Głos Pana', 9, 1, 17.5, 'Oxford University Press'),
+('0011223344', 21, 'Fiasko', 8, 1, 19.0, 'Cambridge University Press');
 
 INSERT INTO Przypisanie_gatunkow (Nazwa_gatunku, ISBN) VALUES
 ('Przygodowe', '9999999999');
