@@ -109,11 +109,3 @@ CREATE TABLE Operacje
     FOREIGN KEY (ISBN) REFERENCES Ksiazki(ISBN) ON UPDATE CASCADE
 );
 
-
--- triggers
-CREATE TRIGGER Operacje_quantity_Ksiazki
-ON Ksiazki
-AFTER INSERT, UPDATE
-AS
-BEGIN
-    IF EXISTS 
