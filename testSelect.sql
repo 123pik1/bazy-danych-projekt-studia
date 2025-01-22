@@ -1,1 +1,1 @@
-SELECT * FROM Przypisanie_gatunkow;
+SELECT * From Osoby;

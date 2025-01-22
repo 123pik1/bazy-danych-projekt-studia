@@ -9,3 +9,5 @@ DROP TABLE IF EXISTS Wydawcy;
 DROP TABLE IF EXISTS Pracownicy;
 DROP TABLE IF EXISTS Klienci;
 DROP TABLE IF EXISTS Osoby;
+
+drop VIEW IF EXISTS WypozyczoneKsiazkiZDniamiDoOddania;

@@ -28,7 +28,7 @@ CREATE TABLE Pracownicy
 
 CREATE TABLE Wydawcy
 (
-    Nazwa_wydawcy VARCHAR(25) NOT NULL CHECK (LEN(Nazwa_wydawcy) BETWEEN 3 AND 25),
+    Nazwa_wydawcy VARCHAR(100) NOT NULL CHECK (LEN(Nazwa_wydawcy) BETWEEN 3 AND 100),
     Miasto_pochodzenia VARCHAR(20) NOT NULL CHECK (LEN(Miasto_pochodzenia) BETWEEN 2 AND 20),
     Rok_zalozenia DATE NOT NULL,
     PRIMARY KEY (Nazwa_wydawcy)
@@ -38,11 +38,11 @@ CREATE TABLE Ksiazki
 (
     ISBN VARCHAR(15) NOT NULL CHECK (LEN(ISBN)=10 OR LEN(ISBN)=13),
     ID_autora INT NOT NULL,
-    Tytul_ksiazki VARCHAR(30) NOT NULL CHECK (LEN(Tytul_ksiazki) BETWEEN 1 AND 30),
+    Tytul_ksiazki VARCHAR(200) NOT NULL CHECK (LEN(Tytul_ksiazki) BETWEEN 1 AND 200),
     Liczba_ksiazek INT NOT NULL CHECK (Liczba_ksiazek > 0),
     Mozliwosc_wypozyczenia BIT NOT NULL,
     Kara_za_przetrzymanie Money NOT NULL,
-    Wydawca VARCHAR(25) NOT NUlL,
+    Wydawca VARCHAR(100) NOT NULL,
     PRIMARY KEY (ISBN),
     FOREIGN KEY (ID_autora) REFERENCES Osoby(ID_osoby)  ON DELETE CASCADE,
     FOREIGN KEY (Wydawca) REFERENCES Wydawcy(Nazwa_wydawcy)  ON DELETE CASCADE ON UPDATE CASCADE
