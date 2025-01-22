@@ -13,6 +13,7 @@ CREATE TABLE Klienci
 (
     ID_klienta INT NOT NULL,
     email VARCHAR(50) NOT NULL CHECK (PATINDEX('%[@]%',email)>1 AND PATINDEX('%[@]%',email)<LEN(email)),
+    zawieszony BIT DEFAULT 0,
     FOREIGN KEY (ID_klienta) REFERENCES Osoby(ID_osoby) ON DELETE CASCADE, -- No practcal use if its index IDENTITY(1,1)
     PRIMARY KEY (ID_klienta)
 );
@@ -78,7 +79,8 @@ CREATE TABLE Wypozyczenia
 (
     ID_rezerwacji INT NOT NULL,
     Data_wypozyczenia DATE NOT NULL,
-    Termin_oddania DATE NOT NULL, --CHECK ((DATEDIFF(day,Data_wypozyczenia, Termin_oddania)<0)),
+    Termin_oddania DATE NOT NULL, 
+    Data_oddania DATE,
     PRIMARY KEY (ID_rezerwacji),
     FOREIGN KEY (ID_rezerwacji) REFERENCES Rezerwacje(ID_rezerwacji)
 );
