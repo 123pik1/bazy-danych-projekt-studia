@@ -13,5 +13,5 @@ JOIN (SELECT R.ISBN,COUNT(*) AS Liczba_ksiazek
      WHERE GETDATE() < W.Termin_oddania AND W.Data_oddania IS NULL
        AND R.ISBN = Ksiazki.ISBN
        GROUP BY R.ISBN) AS Wyp ON Ksiazki.ISBN = Wyp.ISBN
-WHERE Przypisanie_gatunkow.Nazwa_gatunku = 'Przygodowe' AND Ksiazki.Liczba_ksiazek > Wyp.Liczba_ksiazek
+WHERE Przypisanie_gatunkow.Nazwa_gatunku = 'Przygodowe' AND Ksiazki.Liczba_ksiazek > Wyp.Liczba_ksiazek AND Ksiazki.Mozliwosc_wypozyczenia = 1
 ORDER BY Dostepne_ksiazki ASC;

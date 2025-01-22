@@ -42,7 +42,7 @@ CREATE TABLE Ksiazki
     Tytul_ksiazki VARCHAR(200) NOT NULL CHECK (LEN(Tytul_ksiazki) BETWEEN 1 AND 200),
     Liczba_ksiazek INT NOT NULL CHECK (Liczba_ksiazek > 0),
     Mozliwosc_wypozyczenia BIT NOT NULL,
-    Kara_za_przetrzymanie Money NOT NULL,
+    Kara_za_przetrzymanie Money ,
     Wydawca VARCHAR(100) NOT NULL,
     PRIMARY KEY (ISBN),
     FOREIGN KEY (ID_autora) REFERENCES Osoby(ID_osoby)  ON DELETE CASCADE,
@@ -81,8 +81,10 @@ CREATE TABLE Wypozyczenia
     Data_wypozyczenia DATE NOT NULL,
     Termin_oddania DATE NOT NULL, 
     Data_oddania DATE,
+    ID_pracownika INT NOT NULL,
     PRIMARY KEY (ID_rezerwacji),
-    FOREIGN KEY (ID_rezerwacji) REFERENCES Rezerwacje(ID_rezerwacji)
+    FOREIGN KEY (ID_rezerwacji) REFERENCES Rezerwacje(ID_rezerwacji),
+    FOREIGN KEY (ID_pracownika) REFERENCES Pracownicy(ID_pracownika)
 );
 
 CREATE TABLE Kary
