@@ -9,4 +9,4 @@ From Pracownicy Join Osoby ON Pracownicy.ID_pracownika = Osoby.ID_osoby) AS Pr
 JOIN Wypozyczenia ON Pr.ID = Wypozyczenia.ID_pracownika
 GROUP BY Pr.ID, Pr.Imie, Pr.Nazwisko, Pr.Data_rozpoczecia_pracy, Wypozyczenia.Data_wypozyczenia
 HAVING DATEDIFF(MONTH, Wypozyczenia.Data_wypozyczenia, GETDATE()) = 1
-ORDER BY COUNT(Wypozyczenia.ID_rezerwacji) DESC;
+ORDER BY COUNT(Wypozyczenia.ID_rezerwacji) DESC, Pr.Data_rozpoczecia_pracy ASC;
